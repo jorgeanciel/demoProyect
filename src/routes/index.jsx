@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from '../view/Login';
 import Layout from '../view/Layout';
-import Empresas from '../view/Empresas';
+import Empresas from '../view/Empresas.view';
 import Categorias from '../view/Categorias';
 import SubCategorias from '../view/SubCategorias';
 

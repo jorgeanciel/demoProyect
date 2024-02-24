@@ -22,7 +22,7 @@ const ModalPost = (props) => {
           <Divider />
           <form noValidate onSubmit={formik.handleSubmit}>
             <Grid container sx={{ px: 4, py: 2 }} rowGap={2}>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <TextField
                   label="Nombre de Empresa"
                   error={!!(formik.touched.Nombre && formik.errors.Nombre)}
@@ -33,7 +33,7 @@ const ModalPost = (props) => {
                   onBlur={formik.handleBlur}
                 />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <TextField
                   label="RUC de empresa"
                   error={!!(formik.touched.Ruc && formik.errors.Ruc)}
@@ -45,7 +45,7 @@ const ModalPost = (props) => {
                   type="number"
                 />
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   label="Descripcion de Empresa"
                   fullWidth
@@ -57,7 +57,7 @@ const ModalPost = (props) => {
                   onBlur={formik.handleBlur}
                 />
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   label="Direccion de Empresa"
                   fullWidth
@@ -69,7 +69,7 @@ const ModalPost = (props) => {
                   onBlur={formik.handleBlur}
                 />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <TextField
                   type="number"
                   label="Telefono de Empresa"
@@ -81,7 +81,7 @@ const ModalPost = (props) => {
                   onBlur={formik.handleBlur}
                 />
               </Grid>
-              <Grid>
+              <Grid item> {/* Asegúrate de agregar `item` aquí */}
                 <TextField
                   label="Encargado"
                   error={!!(formik.touched.Responsable && formik.errors.Responsable)}

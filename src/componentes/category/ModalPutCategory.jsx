@@ -9,11 +9,14 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { getAllCompany } from '../../services/getAllCompany';
+import {businessServices} from '../../services/business/business.services';
+
 
 const ModalPutCategory = (props) => {
   const { open, close, updateCategory, handleChange, category } = props;
   const [company, setCompany] = useState([]);
+
+  const { getAllCompany } = businessServices();
 
   useEffect(() => {
     const getCompany = async () => {

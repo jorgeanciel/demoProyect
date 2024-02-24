@@ -10,11 +10,13 @@ import {
 } from '@mui/material';
 
 import React, { useEffect, useState } from 'react';
-import { getAllCompany } from '../../services/getAllCompany';
+import {businessServices} from '../../services/business/business.services';
 
 const ModalPostCategory = (props) => {
   const [company, setCompany] = useState([]);
   const { open, close, handleChange, postCategory } = props;
+
+  const { getAllCompany } = businessServices();
 
   useEffect(() => {
     const getCompany = async () => {

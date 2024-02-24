@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Scrollbar } from '../common/ScrollBar';
-import { getAllCompany } from '../../services/getAllCompany';
+import { getAllCompany } from '../../services/business/getAllCompany.services';
 import { Edit } from '@mui/icons-material';
 import ModalPut from './ModalPut';
 

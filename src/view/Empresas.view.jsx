@@ -15,21 +15,23 @@ import {
 import AddBusinessTwoToneIcon from '@mui/icons-material/AddBusinessTwoTone';
 import React, { useEffect, useState } from 'react';
 import ModalPost from '../componentes/company/ModalPost';
-import TableCompany from '../componentes/company/TableCompany';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { createCompany } from '../services/createCompany';
+import { createCompany } from '../services/business/createCompany.services';
 import { axiosInstance } from '../api/axiosInstance';
-import { getAllCompany } from '../services/getAllCompany';
 import ModalPut from '../componentes/company/ModalPut';
 import { Scrollbar } from '../componentes/common/ScrollBar';
 import { Edit } from '@mui/icons-material';
+import {businessServices} from '../services/business/business.services';
 
 const Empresas = () => {
   const [postModal, setPostModal] = useState(false);
   const [putModal, setPutModal] = useState(false);
   const [dataPut, setDataPut] = useState([]);
   const [data, setData] = useState([]);
+
+  const {  getAllCompany } = businessServices();
+
 
   useEffect(() => {
     const loadData = async () => {
@@ -47,16 +49,15 @@ const Empresas = () => {
     setPutModal(!putModal);
   };
 
-  const updateId = async (id) => {
+  const updateId = async (values) => {
     try {
-      const res = await axiosInstance.get(`empresaSingle/${id}`);
-      setDataPut(res.data.data);
+      setDataPut(values);
       closeModalUpdate();
-      console.log(dataPut);
     } catch (error) {
       console.error(error);
     }
   };
+
 
   const updateCompany = async (value) => {
     await axiosInstance.put('empresa/update', value).then((response) => {
@@ -149,8 +150,8 @@ const Empresas = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data.map((company) => (
-                    <TableRow key={company.ruc} hover>
+                  {data.map((company, index) => (
+                    <TableRow key={`table-row-${index}`} hover>
                       <TableCell>{company.nombre}</TableCell>
                       <TableCell>{company.descripcion}</TableCell>
                       <TableCell>{company.direccion}</TableCell>
@@ -161,7 +162,7 @@ const Empresas = () => {
                         <SvgIcon
                           fontSize="small"
                           sx={{ cursor: 'pointer', color: '#1976d2' }}
-                          onClick={() => updateId(company.empresaId)}
+                          onClick={() => updateId(company)}
                         >
                           <Edit />
                         </SvgIcon>
@@ -172,11 +173,16 @@ const Empresas = () => {
               </Table>
             </Scrollbar>
           </Card>
-          <ModalPut
-            dataUpdate={dataPut}
-            openModalUpdate={putModal}
-            closeModalUpdate={closeModalUpdate}
-          />
+
+          {
+            putModal && 
+            <ModalPut
+              dataUpdate={dataPut}
+              openModalUpdate={putModal}
+              closeModalUpdate={closeModalUpdate}
+            />
+          }
+       
         </Container>
       </Box>
     </>

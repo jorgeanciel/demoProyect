@@ -135,8 +135,9 @@ const MenuList = (props) => {
               m: 0,
             }}
           >
-            {menuList.map((list) => (
+            {menuList.map((list,index) => (
               <Accordion
+                key={`menu-list-${index}`}
                 sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}
                 disableGutters={true}
                 defaultExpanded={true}

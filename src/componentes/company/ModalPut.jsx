@@ -30,7 +30,7 @@ const ModalPut = (props) => {
     }));
   };
 
-  const updateCompany = async (dataToUpdate) => {
+  const updateCompany = async () => {
     try {
       await axiosInstance.put('empresa/update', dataToUpdate);
     } catch (error) {
@@ -38,15 +38,19 @@ const ModalPut = (props) => {
     }
   };
 
+  useEffect(()=>{
+    setDataToUpdate(dataUpdate)
+  },[dataUpdate])
+
   return (
     <>
       <Dialog open={openModalUpdate} onClose={closeModalUpdate}>
         <Card>
           <CardHeader title="Actualiza los datos" />
           <Divider />
-          <form noValidate>
+          <form noValidate autoComplete="off" onSubmit={updateCompany}>
             <Grid container sx={{ px: 4, py: 2 }} rowGap={2}>
-              <Grid xs={6}>
+              <Grid item xs={6}> 
                 <TextField
                   label="Nombre de Empresa"
                   value={dataToUpdate.nombre}
@@ -54,45 +58,45 @@ const ModalPut = (props) => {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}> 
                 <TextField
                   label="RUC de empresa"
-                  value={dataUpdate.ruc}
+                  value={dataToUpdate.ruc}
                   name="ruc"
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}> 
                 <TextField
                   label="Descripcion de Empresa"
                   fullWidth
-                  value={dataUpdate.descripcion}
+                  value={dataToUpdate.descripcion}
                   name="descripcion"
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   label="Direccion de Empresa"
                   fullWidth
-                  value={dataUpdate.direccion}
+                  value={dataToUpdate.direccion}
                   name="direccion"
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}> 
                 <TextField
                   type="number"
                   label="Telefono de Empresa"
-                  value={dataUpdate.telefono}
+                  value={dataToUpdate.telefono}
                   name="telefono"
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid>
+              <Grid item>
                 <TextField
                   label="Encargado"
-                  value={dataUpdate.responsable}
+                  value={dataToUpdate.responsable}
                   name="responsable"
                   onChange={handleChange}
                 />
@@ -101,7 +105,7 @@ const ModalPut = (props) => {
             <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1 }}>
               <Button type="submit" variant="contained">
-                Agregar
+                Actualizar
               </Button>
               <Button onClick={closeModalUpdate}>Cancelar</Button>
             </Box>
